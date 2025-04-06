@@ -9,7 +9,11 @@
   "routes": [
     {
       "src": "/api/product",
-      "dest": "/api/api.js" 
+      "dest": "/api/fetproduct.js" 
+    },
+    {
+      "src": "/api/listed",
+      "dest": "/api/listedprod.js" 
     }
     ]
 }

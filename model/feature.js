@@ -14,16 +14,7 @@ const productSchema = new Schema({
   productImage: { type: String},
   name: {type: String},
   price: {type: Number},
-  clothingShot: {type: String},
-  fabric: {type: String},
-  sleeveLength: {type: String},
-  pattern: {type: String},
-  comboOf: {type: String},
-  withDupatta: {type: Boolean},
-  sizes: {type: [String],
-    enum: ['S', 'M', 'L', 'XL', 'XXL']},
-  rate: {type: Number },
-  countryOfOrigin: { type: String}
+ 
 }, {
   timestamps: true // Automatically add createdAt and updatedAt fields
 });
