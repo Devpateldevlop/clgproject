@@ -1,0 +1,52 @@
+[{
+
+  "productId": "P001",
+  "type": "Clothing",
+  "name": "Product1",
+  "price": 650
+},
+{
+
+  "productId": "P002",
+  "type": "Clothing",
+  "name": "Anita Georgette Saree",
+  "price": 750
+},
+{
+ 
+  "productId": "P003",
+  "type": "Clothing",
+  "name": "Anita Georgette Saree",
+  "price": 900
+},
+{
+  "productId": "P004",
+  "type": "Clothing",
+  "name": "Anita Georgette Saree",
+  "price": 900
+
+}
+,
+{
+  "productId": "P005",
+  "type": "Clothing",
+  "name": "Anita Georgette Saree",
+  "price": 900
+
+},
+{
+  "productId": "P006",
+  "type": "Clothing",
+  "name": "Anita Georgette Saree",
+  "price": 900
+
+},
+{
+  "productId": "P007",
+  "type": "Clothing",
+  "name": "Anita Georgette Saree",
+  "price": 900
+
+}
+
+]
