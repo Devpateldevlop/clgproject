@@ -1,5 +1,5 @@
 const express = require('express');
-const Product = require('../model/feature'); // Adjust the path if necessary
+const Product = require('../model/listed'); // Adjust the path if necessary
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -23,7 +23,7 @@ mongoose.connect("mongodb+srv://Dev:Devpatel123@cluster0.w7lmtlf.mongodb.net")
 
 
 // CREATE a new product entry
-app.post('/api/product', async (req, res) => {
+app.post('/api/listed', async (req, res) => {
     try {
         const product = new Product(req.body);
 
@@ -45,7 +45,7 @@ app.get('/api/listed', async (req, res) => {
 });
 
 // READ a single product entry by ID
-app.get('/api/product/:id', async (req, res) => {
+app.get('/api/listed/:id', async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) return res.status(404).json({ message: 'Product not found' });
@@ -56,7 +56,7 @@ app.get('/api/product/:id', async (req, res) => {
 });
 
 // UPDATE a product entry by ID
-app.put('/api/product/:id', async (req, res) => {
+app.put('/api/listed/:id', async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedProduct) return res.status(404).json({ message: 'Product not found' });
@@ -67,7 +67,7 @@ app.put('/api/product/:id', async (req, res) => {
 });
 
 // DELETE a product entry by ID
-app.delete('/api/product/:id', async (req, res) => {
+app.delete('/api/listed/:id', async (req, res) => {
     try {
         const deletedProduct = await Product.findByIdAndDelete(req.params.id);
         if (!deletedProduct) return res.status(404).json({ message: 'Product not found' });
@@ -78,7 +78,7 @@ app.delete('/api/product/:id', async (req, res) => {
 });
 
 // DELETE all product entries (optional)
-app.delete('/api/product', async (req, res) => {
+app.delete('/api/listed', async (req, res) => {
     try {
         await Product.deleteMany({});
         res.status(200).json({ message: 'All products deleted successfully' });
