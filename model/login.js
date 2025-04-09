@@ -10,7 +10,7 @@ mongoose.connect("mongodb+srv://Dev:Devpatel123@cluster0.w7lmtlf.mongodb.net")
 const productSchema = new schema({ 
     userid: {type: String,unique: true},
     mailid: {type: String},
-    username: {type: Number,unique: true},
+    username: {type: Number},
     password: {type: String},
 })
 
