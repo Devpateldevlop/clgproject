@@ -2,7 +2,8 @@ const express = require('express');
 const Product = require('../model/listed'); // Adjust the path if necessary
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const multer = require('multer'); // Required for file uploads
+const Grid = require('gridfs-stream'); 
 // Express app setup
 const app = express();
 
@@ -23,6 +24,65 @@ app.use(express.urlencoded({ extended: false }));
 mongoose.connect("mongodb+srv://Dev:Devpatel123@cluster0.w7lmtlf.mongodb.net")
     .then(() => console.log('MongoDB Connected...'))
     .catch((err) => console.log('MongoDB connection error: ' + err));
+
+
+
+
+// MongoDB connection URL
+const mongoURI = 'mongodb+srv://Dev:Devpatel123@cluster0.w7lmtlf.mongodb.net';
+
+// Create mongoose connection
+const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Initialize GridFS stream
+let gfs;
+conn.once('open', () => {
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('test'); 
+});
+
+// Set up multer storage engine to handle file uploads
+const storage = multer.memoryStorage(); // Store file in memory
+const upload = multer({ storage: storage });
+
+// Endpoint to upload MP4 file
+app.post('/api/upload', upload.single('file'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
+
+  const writeStream = gfs.createWriteStream({
+    filename: req.file.originalname,
+    content_type: req.file.mimetype,
+  });
+
+  writeStream.on('close', (file) => {
+    res.status(200).send({ fileId: file._id, message: 'File uploaded successfully!' });
+  });
+
+  writeStream.write(req.file.buffer);
+  writeStream.end();
+});
+
+app.get('/api/upload', upload.single('file'), (req, res) => {
+    // if (!req.file) {
+    //   return res.status(400).send('No file uploaded.');
+    // }
+  
+    // const writeStream = gfs.createWriteStream({
+    //   filename: req.file.originalname,
+    //   content_type: req.file.mimetype,
+    // });
+  
+    // writeStream.on('close', (file) => {
+    //   res.status(200).send({ fileId: file._id, message: 'File uploaded successfully!' });
+    // });
+  
+    // writeStream.write(req.file.buffer);
+    // writeStream.end();
+  });
+
+
 
 // CREATE: Add a new product
 app.post('/api/listed', async (req, res) => {
